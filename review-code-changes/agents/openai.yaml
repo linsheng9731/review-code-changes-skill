@@ -1,0 +1,13 @@
+interface:
+  display_name: Code Review 助手
+  short_description: 生成改动摘要、核心流程图、可疑代码清单与逐处审查注释，辅助开发者评审
+  default_prompt: 使用 $review-code-changes 审查当前改动，按业务流程总结核心与非核心改动，绘制影响流程图，列出可疑代码并为每处改动说明意图、作用及必要性。
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

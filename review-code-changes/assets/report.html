@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-CN"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{TITLE}}</title>
+<style>
+:root{color-scheme:light;--ink:#172033;--muted:#657188;--line:#e6ebf2;--blue:#2765d8;--wash:#f6f9fd}*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:24px}body{margin:0;background:#fafbfd;color:var(--ink);font:14px/1.7 system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:1360px;margin:28px 24px 28px 276px;padding:32px;background:white;border:1px solid var(--line);border-radius:16px;min-width:0}header{border-bottom:1px solid var(--line);padding-bottom:22px}
+h1{font-size:25px;line-height:1.4;margin:0 0 10px}h2{font-size:18px;margin:32px 0 14px}h3{font-size:15px;margin:12px 0}p{margin:8px 0}.meta,.muted{color:var(--muted);font-size:12px}
+.stats,.tags{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.badge{font-size:12px;border-radius:5px;padding:2px 7px;background:#eef2f7;color:#536074}.p0,.p1{background:#fff0f0;color:#c42f39}.p2{background:#fff5df;color:#a35d00}.p3{background:#edf4ff;color:var(--blue)}
+.added{background:#e9faf2;color:#16704b}.modified{background:#fff5df;color:#a35d00}.removed{background:#fff0f0;color:#c42f39}.summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.panel,.card,details{border:1px solid var(--line);border-radius:10px;padding:16px;margin:12px 0}.panel{background:var(--wash)}.card:target,.annotation:target{outline:2px solid #62a1ff;background:#f2f8ff}
+.annotation{border-left:3px solid #76b7ff;padding:10px 14px;background:#f5faff;margin:12px 0;scroll-margin-top:20px}a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}nav{display:flex;gap:14px;flex-wrap:wrap;margin-top:16px;font-size:13px}summary{cursor:pointer;font-weight:600}
+.report-toc{position:fixed;top:28px;bottom:28px;left:20px;width:232px;overflow:auto;background:white;border:1px solid var(--line);border-radius:12px;padding:16px;overscroll-behavior:contain}.report-toc .toc-panel{border:0;padding:0;margin:0}.report-toc summary{font-size:14px;color:var(--ink)}.report-toc nav{display:block;margin-top:12px}.toc-list,.toc-sublist{list-style:none;margin:0;padding:0}.toc-list>li{margin:4px 0}.report-toc a{display:block;padding:7px 10px;border-radius:6px;color:#536074;overflow-wrap:anywhere}.report-toc a:hover,.report-toc a:focus-visible{background:#eef4ff;color:var(--blue)}.report-toc a:focus-visible{outline:2px solid var(--blue);outline-offset:1px}.toc-sublist{margin:3px 0 8px 10px;border-left:1px solid var(--line);padding-left:6px}.toc-sublist a{font-size:12px;padding:5px 9px}.toc-sublist:empty{display:none}
+.plain-summary{background:#f0f6ff;border-radius:8px;padding:12px 14px;margin:10px 0;font-size:15px}.plain-example{border-left:3px solid #a8bfdc;background:#f8fafc;padding:10px 14px;margin:10px 0}.technical{background:#fafbfd;font-size:13px}.technical summary{color:#536074;font-weight:500}
+.change-group{border:1px solid var(--line);border-radius:12px;padding:20px;margin:20px 0;scroll-margin-top:20px}.change-group:target{outline:2px solid #62a1ff}.change-group>header{padding-bottom:12px}.change-group h3{font-size:17px}.change-group h4{font-size:14px;margin:18px 0 10px}.group-review-units{padding-top:2px}.group-conclusion{background:var(--wash);border-radius:8px;margin-top:16px;padding:10px 14px}
+.review-unit{border:1px solid #d1d9e0;border-radius:8px;overflow:hidden;margin:16px 0;scroll-margin-top:20px}.review-unit:target{outline:2px solid #62a1ff}.review-unit-header{background:#f6f8fa;padding:10px 14px;border-bottom:1px solid #d1d9e0}.review-unit-header h4{margin:0 0 4px;font-size:13px}.review-unit .diff-view{border:0;border-radius:0;margin:0}.review-note{background:#f0f6ff;border-top:1px solid #cbd8e8;padding:12px 14px;scroll-margin-top:20px}.review-note:target{outline:2px solid #62a1ff;outline-offset:-2px}.review-note-heading{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:12px;margin-bottom:8px}.review-note .technical{background:#fafcfe}
+
+table{border-collapse:collapse;width:100%;font-size:13px;margin:12px 0}th,td{padding:9px 11px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top;overflow-wrap:anywhere}th{background:var(--wash)}
+pre{background:#f6f8fa;border:1px solid var(--line);padding:12px;border-radius:8px;overflow:auto;line-height:1.6}code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px}
+.diff-view{border:1px solid #d1d9e0;border-radius:8px;overflow:auto;margin:14px 0;background:white}.diff-view .diff-table{display:table;table-layout:fixed;border-collapse:collapse;width:100%;min-width:880px;margin:0;font:12px/1.7 ui-monospace,SFMono-Regular,Consolas,monospace}
+.diff-table .line-col{width:52px}.diff-table .sign-col{width:22px}.diff-table th,.diff-table td{padding:4px 8px;border:0;vertical-align:top}.diff-table th{font:600 12px/1.7 system-ui,sans-serif;text-align:left;background:#f6f8fa;border-bottom:1px solid #d1d9e0;color:#59636e}
+.diff-table .ln{text-align:right;color:#59636e;user-select:none;padding-right:8px}.diff-table .sign{text-align:center;padding-left:0;padding-right:0;user-select:none}.diff-table .code{white-space:pre-wrap;overflow-wrap:anywhere;tab-size:4;color:#1f2328}.diff-table .code code{font:inherit;white-space:inherit}
+.diff-table .right-start{border-left:1px solid #d1d9e0}.diff-table .del{background:#ffebe9}.diff-table .add{background:#dafbe1}.diff-table .ln.del{background:#ffd7d5;color:#82071e}.diff-table .ln.add{background:#aceebb;color:#116329}.diff-table .gap{background:#f6f8fa}.diff-table .context{background:white}
+.diff-table .hunk td{background:#eef5ff;color:#59636e;border-top:1px solid #d1d9e0;border-bottom:1px solid #d1d9e0;padding:7px 12px;font-size:11px}.diff-table .no-newline{display:block;color:#657188;font:11px/1.7 system-ui,sans-serif;font-style:italic}.diff-empty{padding:12px;color:var(--muted)}
+.flow{border:1px solid var(--line);border-radius:12px;padding:20px;overflow:auto;background-color:#fbfcff;background-image:radial-gradient(#dce4f0 .7px,transparent .7px);background-size:14px 14px}.flow svg{display:block;max-width:100%;height:auto;margin:auto}
+.empty{color:var(--muted);padding:12px;background:var(--wash);border-radius:8px}.warning{border-left:3px solid #f4b653;padding-left:12px}footer{border-top:1px solid var(--line);margin-top:28px;padding-top:14px;font-size:12px;color:var(--muted)}
+@media(max-width:1100px){.report-toc{position:static;width:auto;max-height:320px;margin:16px 24px 0;padding:12px 16px}main{margin:16px 24px 28px}}
+@media(max-width:760px){.report-toc{margin:12px 12px 0}main{padding:20px 16px;margin:12px 0 0;border-radius:0}.summary-grid{grid-template-columns:1fr}h1{font-size:21px}table{display:block;overflow-x:auto}.flow svg{min-width:520px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media print{.report-toc{display:none}main{max-width:none;border:0;margin:0;padding:0}nav{display:none}.card,.annotation{break-inside:avoid}body{background:white}}
+</style></head><body>
+<aside class="report-toc">
+<details class="toc-panel" open>
+<summary>报告目录</summary>
+<nav aria-label="报告目录"><ul class="toc-list">
+<li><a href="#summary">改动 Summary</a></li>
+<li><a href="#findings">CR 问题 / 可疑代码</a></li>
+<li><a href="#core">核心改动点</a><ul class="toc-sublist">{{TOC_CORE_GROUPS}}</ul></li>
+<li><a href="#flow">影响链路</a></li>
+<li><a href="#unexpected">非预期改动 / 待确认</a></li>
+<li><a href="#secondary">非核心改动</a></li>
+<li><a href="#validation">验证结果与未决问题</a></li>
+<li><a href="#coverage">逐处 Review 覆盖清单</a></li>
+</ul></nav>
+</details>
+</aside>
+<main>
+<header><h1>{{TITLE}}</h1><div class="meta">{{META}}</div><div class="stats">{{COUNTS}}</div></header>
+<section id="summary" aria-label="改动摘要"><h2>改动 Summary</h2>{{SUMMARY}}<div class="summary-grid"><div class="panel"><h3>核心改动</h3>{{CORE_SUMMARY}}</div><div class="panel"><h3>非核心改动</h3>{{SECONDARY_SUMMARY}}</div></div></section>
+<section id="findings"><h2>CR 问题汇总 / 高度可疑代码</h2>{{FINDINGS}}</section>
+<section id="core"><h2>核心改动点</h2>{{CORE_CHANGES}}</section>
+<section id="flow"><h2>影响链路</h2><div class="flow">{{FLOW_SVG}}</div>{{FLOW_MAP}}</section>
+<section id="unexpected"><h2>非预期改动 / 范围待确认</h2>{{UNEXPECTED}}</section>
+<section id="secondary"><h2>非核心改动</h2>{{SECONDARY_CHANGES}}</section>
+<section id="validation"><h2>验证结果与未决问题</h2>{{VALIDATION}}</section>
+<section id="coverage"><h2>逐处 Review 覆盖清单</h2>{{COVERAGE}}</section>
+<footer>此报告辅助开发者审查代码。结论与验证限制以本报告记录的范围为准。</footer>
+</main></body></html>
